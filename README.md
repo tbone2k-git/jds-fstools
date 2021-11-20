@@ -1,4 +1,4 @@
-## JDFSTools (jDownloader (Scripting) Filesystem Tools)
+## JDSFSTools (jDownloader Scripting Filesystem Tools)
 
 Some file and folder managing methods for jDownloader scripting.
 
@@ -21,47 +21,47 @@ event scripter extension.
 ### Examples:
 1) Move/rename folder "foo" to "bar" on the same drive (will rename)
 ```js
-var result = JDFSTools.move("D:\\foo", "D:\\bar");
+var result = JDSFSTools.move("D:\\foo", "D:\\bar");
 ```
 
 2) Move folder "foo" to "bar" on different drive (will copy+del)
 ```js
-var result = JDFSTools.move("C:\\foo", "D:\\bar");
+var result = JDSFSTools.move("C:\\foo", "D:\\bar");
 ```
 
 3) Copy folder "foo" to "bar" recursively, force replacing of existing files,
    merge folder contents if folders already exist:  
 ```js
-var result = JDFSTools.copy("D:\\foo", "D:\\bar", { fileMode: "replace",
+var result = JDSFSTools.copy("D:\\foo", "D:\\bar", { fileMode: "replace",
                                                     fldrMode: "merge"    });
 ```
 
 4) Copy folder "foo" to "bar", auto-rename existing files in subfolders  
 ```js
-var result = JDFSTools.move("D:\\foo", "D:\\bar", {
+var result = JDSFSTools.move("D:\\foo", "D:\\bar", {
                                                     fileMode: "rename-dts",
                                                     fldrMode: "merge" } );
 ```
 
 5) Copy folder "foo" to folder "bar" (which exists), auto append timestamp  
 ```js
-var result = JDFSTools.move("D:\\foo", "D:\\bar", { fldrMode: "rename-dts"});
+var result = JDSFSTools.move("D:\\foo", "D:\\bar", { fldrMode: "rename-dts"});
     // result.success == true
     // result.dstPath == "D:\\bar_1636490640569"
 ```
 
 6) Copy folder "foo" to "bar" non-recursively, skip existing files.
 ```js
-var result = JDFSTools.copy("D:\\foo", "D:\\bar", { recursive: false,
+var result = JDSFSTools.copy("D:\\foo", "D:\\bar", { recursive: false,
                                                     fileMode: "skip"  });
 ```
 
 
 7) Copy not existing folder "noex" to "bar" 
 ```js
-var result = JDFSTools.move("D:\\noex", "D:\\bar");
+var result = JDSFSTools.move("D:\\noex", "D:\\bar");
     // result.success == false
-    // result.retCode == JDFSTools.RC_ERR_SRC_NOTFOUND
+    // result.retCode == JDSFSTools.RC_ERR_SRC_NOTFOUND
     // result.message == "Error, src [D:\noext] not found."
 ```
 
@@ -71,7 +71,7 @@ var result = JDFSTools.move("D:\\noex", "D:\\bar");
 - **copy()**  
   Copy a file or folder.  
   ```js
-  var resultObj = JDFSTools.copy( srcFullPath, dstFullPath [, optionsObj] );
+  var resultObj = JDSFSTools.copy( srcFullPath, dstFullPath [, optionsObj] );
   ```                                   
   - #### Parameters (* = default, [] = optional):  
     | Type   | Parameter name     | Description
@@ -108,6 +108,6 @@ var result = JDFSTools.move("D:\\noex", "D:\\bar");
 - **move()**  
   Move a file or folder.  
   ```js
-  var resultObj = JDFSTools.move( srcFullPath, dstFullPath, optionsObj );
+  var resultObj = JDSFSTools.move( srcFullPath, dstFullPath, optionsObj );
   ```
   Same as copy(), but move (for params and results, look copy() method).
