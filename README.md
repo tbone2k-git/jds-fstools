@@ -15,15 +15,9 @@ event scripter extension.
  - support for recursive operations (can be disabled)
  - support for moving across different mountpoints/drives
  - detailed error message and return code for each error situation
- - control "already exists" handling for files and folders..  
-    | file/fldrMode | Description |
-    | -----------   | ----------- |
-    | abort         | Abort operation (default) |
-    | skip          | Skip existing |
-    | rename-dts    | Append timestamp to existing |
-    | replace       | Replace existing |
-    | merge         | Merge existing (folders only) |
-
+ - control "already exists" handling for files and folders..
+   (skip, rename, replace etc.)
+   
 ### Examples:
 1) Move/rename folder "foo" to "bar" on the same drive (will rename)
 ```js
@@ -81,26 +75,35 @@ var result = JDFSTools.move("D:\\noex", "D:\\bar");
   ```                                   
   - #### Parameters (* = default, [] = optional):  
     | Type   | Parameter name     | Description
-    | ------ | ------------------ | ------------------------------------ |
-    | String | srcFullPath        | full path to source file/folder      | 
-    | String | dstFullPath        | full path to destination file/folder | 
-    | Object | [options]          | options                              | 
+    | ------ | ------------------ | ------------------------------------- |
+    | String | srcFullPath        | Full path to source file/folder.      | 
+    | String | dstFullPath        | Full path to destination file/folder. | 
+    | Object | [options]          | Options (see Options table).          | 
     
-    Options (Object):
-    | Type   | Member name        | Description
-    | ------ | ------------------ | ---------------------------------------- |
-    | String | [fileMode]         | abort*, skip, rename-dts, replace        |
-    | String | [fldrMode]         | abort*, skip, rename-dts, replace, merge |
-    | Bool   | [recursive]        | recursive processing true*, false        |
+    - Options (Object):
+        | Type   | Member name        | Description
+        | ------ | ------------------ | ---------------------------------------- |
+        | String | [fileMode]         | (See File/Folder exists modes table.)    |
+        | String | [fldrMode]         | (See File/Folder exists modes table.)    |
+        | Bool   | [recursive]        | Recursive processing true*, false        |
+    
+        - File/Folder exists modes:
+            | Type   | Name          | Description                    |
+            | ------ | -----------   | ------------------------------ |
+            | String | abort         | Abort operation (default).     |
+            | String | skip          | Skip existing.                 |
+            | String | rename-dts    | Append timestamp to existing.  |
+            | String | replace       | Replace existing.              |
+            | String | merge         | Merge existing (folders only). |
     
   - #### Result Object:
     | Type     | Member name        | Description
     | -------- | ------------------ | ---------------------------------------- |
-    | Bool     | success            |                                          |
-    | Long     | retCode            |                                          |
-    | String   | message            |                                          |
-    | FilePath | srcPath            |                                          |
-    | FilePath | dstPath            |                                          |
+    | Bool     | success            | Successful or not                        |
+    | Long     | retCode            | Return code                              |
+    | String   | message            | Friendly (error) message                 |
+    | FilePath | srcPath            | Source FilePath                          |
+    | FilePath | dstPath            | Destination FilePath                     |
   
 - **move()**  
   Move a file or folder.  
