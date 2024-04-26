@@ -1,7 +1,9 @@
 // #############################################################################
-// JDFSTools (jDownloader Filesystem Tools) v0.1, 2011-11-08, tb..
+// JDSFSTools (jDownloader Scripting Filesystem Tools) v0.1, 2021-11-08, tb..
 // Some file and folder managing methods for jDownloader scripting.
 // 
+// https://github.com/tbone2k-git/jds-fstools
+//
 // Since there are 7 methods in jDownloader to handle copying/moving of files
 // and folders (copyTo(), copyTo(,,), moveTo(), rename(), renameName(),
 // renamePath() and renameTo()) and none of them worked as I expected, I wrote
@@ -24,41 +26,41 @@
 // Examples:
 // 1) Copy folder "foo" to "bar" recursively, force replacing of existing files,
 //    merge folder contents if folders already exist:
-//      var result = JDFSTools.copy("D:\\foo", "D:\\bar", {
+//      var result = JDSFSTools.copy("D:\\foo", "D:\\bar", {
 //                                              fileMode: "replace",
 //                                              fldrMode: "merge" } );
 //
 // 2) Copy folder "foo" to "bar", auto-rename existing files in subfolders
-//      var result = JDFSTools.move("D:\\foo", "D:\\bar", {
+//      var result = JDSFSTools.move("D:\\foo", "D:\\bar", {
 //                                              fileMode: "rename-dts",
 //                                              fldrMode: "merge" } );
 //
 // 3) Copy folder "foo" to folder "bar" (which exists), auto append timestamp 
-//      var result = JDFSTools.move("D:\\foo", "D:\\bar", {fldrMode: "rename-dts"});
+//      var result = JDSFSTools.move("D:\\foo", "D:\\bar", {fldrMode: "rename-dts"});
 //      // result.success == true
 //      // result.dstPath == "D:\\bar_1636490640569"
 //
 // 4) Copy folder "foo" to "bar" non-recursively, skip existing files.
-//      var result = JDFSTools.copy("D:\\foo", "D:\\bar", { 
+//      var result = JDSFSTools.copy("D:\\foo", "D:\\bar", { 
 //                                              recursive: false,
 //                                              fileMode: "skip" } );
 //
 // 5) Move/rename folder "foo" to "bar" on the same drive (will rename)
-//      var result = JDFSTools.move("D:\\foo", "D:\\bar");
+//      var result = JDSFSTools.move("D:\\foo", "D:\\bar");
 //
 // 6) Move folder "foo" to "bar" on different drive (will copy+del)
-//      var result = JDFSTools.move("C:\\foo", "D:\\bar");
+//      var result = JDSFSTools.move("C:\\foo", "D:\\bar");
 //
 // 7) Copy not existing folder "noex" to "bar" 
-//      var result = JDFSTools.move("D:\\noex", "D:\\bar");
+//      var result = JDSFSTools.move("D:\\noex", "D:\\bar");
 //      // result.success == false
-//      // result.retCode == JDFSTools.RC_ERR_SRC_NOTFOUND
+//      // result.retCode == JDSFSTools.RC_ERR_SRC_NOTFOUND
 //      // result.message == "Error, src [D:\noext] not found."
 //
 // 8) ..
 //
 // #############################################################################
-var JDFSTools = new (function() {
+var JDSFSTools = new (function() {
 
     // #########################################################################
     // copy() - Copy a file or folder.
